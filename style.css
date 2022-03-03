@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.gameboard {
+    height: 50vh;
+    width: 50vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.winner {
+    margin-top: 10%;
+    display: none;
+}
