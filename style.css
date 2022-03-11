@@ -1,28 +1,196 @@
+:root {
+    --mainColor: #edc7b7;
+    --lightColor: #eee2dc;
+    --grayColor: #bab2b5;
+    --blueColor: #123C69;
+    --pinkColor: #ac3b61;
+
+}
+
+html {
+    border: 30px solid var(--blueColor);
+    height: 94vh;
+    border-radius: 10px;
+}
+
 html, body {
     margin: 0;
     padding: 0;
+    background-color: var(--mainColor);
+    
 }
 
 .header {
     text-align: center;
+    background-color: var(--pinkColor);
+    margin-top: 0;
+    padding: 20px;
+    margin-bottom: 10px;
+    color: var(--lightColor);
 }
 
 .container {
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     align-items: center;
-    flex-direction: column;
 }
+
+
 .gameboard {
     height: 50vh;
     width: 50vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    flex: 1 0 auto;
+    background-color: var(--lightColor);
+    border-color: var(--pinkColor);
+    border-radius: 10px;
+    box-shadow: 0 1px 100px var(--blueColor), 0 1px 4px var(--blueColor);
 }
 
 .winner {
     margin-top: 10%;
     display: none;
+    background-color: var(--blueColor);
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    color: var(--lightColor);
+    border-radius: 10px;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    box-shadow: 0 1px 6px black, 0 1px 4px black;
 }
+
+#display {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+#reset {
+    visibility: hidden;
+    background-color: var(--lightColor);
+    border-radius: 5px;
+    border: 2px solid var(--blueColor);
+    width: 120px;
+}
+
+#player1, #player2, #q2p2 {
+    display: flex;
+    flex-direction: column;
+}
+
+#mainArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chooseName {
+    width: 15ch;
+}
+
+.chooseSym {
+    width: 1.5ch;
+}
+
+#menu {
+    border: 1px solid var(--blueColor);
+    padding: 20px 10px;
+    width: 230px;
+    border-radius: 10px;
+    background-color: var(--lightColor);
+    box-shadow: 0 1px 6px black, 0 1px 4px black;
+}
+
+#options {
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    
+}
+
+.question {
+    margin-bottom: 5px;
+}
+
+#q2p2 {
+    display: none;
+}
+
+.messages {
+    display: none;
+}
+
+#cpu {
+    display: none;
+}
+
+#name1, #name2 {
+    font-size: 30px;
+    color: var(--blueColor);
+}
+
+.gameBtn {
+    border-color: var(--pinkColor);
+    background-color: var(--lightColor);
+}
+
+#reset:hover {
+    background-color: var(--pinkColor);
+}
+
+.notClicked:hover {
+    background-color: var(--pinkColor);
+}
+
+#vs {
+    color: var(--pinkColor);
+}
+
+.btnWin {
+    background-color: var(--blueColor)
+}
+
+input {
+    border-color: var(--blueColor);
+    border-radius: 5px;
+    color: var(--pinkColor)
+}
+
+.btn0 {
+    border-radius: 10px 0px 0px 0px;
+}
+
+.btn2 {
+    border-radius: 0px 10px 0px 0px
+}
+
+.btn8 {
+    border-radius: 0px 0px 10px 0px;
+}
+
+.btn6 {
+    border-radius: 0px 0px 0px 10px;
+}
+
+#winner {
+    padding: 10px;
+}
+
+#winningMessage {
+    padding: 10px;
+}
+
+

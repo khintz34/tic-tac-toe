@@ -9,18 +9,69 @@
   <body>
     <h1 class="header">TOP: Tic-Tac-Toe</h1>
     <div class="container">
-      <div class="gameboard">
-        <button class="btn1 gameBtn" data-value="0"></button>
-        <button class="btn2 gameBtn" data-value="1"></button>
-        <button class="btn3 gameBtn" data-value="2"></button>
-        <button class="btn4 gameBtn" data-value="3"></button>
-        <button class="btn5 gameBtn" data-value="4"></button>
-        <button class="btn6 gameBtn" data-value="5"></button>
-        <button class="btn7 gameBtn" data-value="6"></button>
-        <button class="btn8 gameBtn" data-value="7"></button>
-        <button class="btn9 gameBtn" data-value="8"></button>
-      </div>
-      <div class="winner">CONGRATS YOU WIN OR SORRY YOU LOST</div>
+        <div id="menu">
+            <p id='options'>OPTIONS:</p>
+            <div id="player1">
+                <label for="choose-name-1" >Choose Player One Name: </label>
+                <input type="text" id='choose-name-1' class='chooseName' placeholder="Player1" maxlength="15">
+                <div class="sym">
+                    <label for="choose-sym-1">Choose Player One Symbol: </label>
+                    <input type="text" id='choose-sym-1' class='chooseSym' placeholder="X" maxlength="1">
+                </div>
+            </div>
+            <div id="player2">
+                <div id="q1p2" class='question'>
+                    <p class='question'>Will Player 2 be Human or CPU?</p>
+                    <input type='radio' id='p2-typeH' name='p2-type' value='human'>
+                    <label for="p2-type">Human</label><br>
+                    <input type='radio' id='p2-typeC' name='p2-type' value='cpu'>
+                    <label for="p2-type">CPU</label><br>
+                </div>  
+                <div id="cpu">
+                    <p id='question2' class='question'>CPU Difficulty:</p>
+                    <input type='radio' id='cpu-easy' name='cpuDiff' value='easy'>
+                    <label for="p2-type">Easy</label><br>
+                    <input type='radio' id='cpu-med' name='cpuDiff' value='medium' >
+                    <label for="p2-type">Medium</label><br>
+                    <input type='radio' id='cpu-hard' name='cpuDiff' value='hard' >
+                    <label for="p2-type">Hard</label><br>
+                </div>
+                <div id="q2p2">
+                    <label for="choose-name-2" >Choose Player Two Name: </label>
+                    <input type="text" id='choose-name-2' class='chooseName' placeholder="Player2" maxlength="15">
+                    <div class="sym">
+                        <label for="choose-sym-2">Choose Player Two Symbol: </label>
+                        <input type="text" id='choose-sym-2' class='chooseSym' placeholder="O" maxlength="1">
+                    </div>
+                </div>
+            </div> 
+            <div>
+                <p class="messages"></p>
+            </div> 
+        </div>      
+        <div id="mainArea">
+            <button id="reset">RESET GAME</button>
+            <div id="display">
+                <p id="name1">Player1</p>
+                <p id='vs'>VS.</p>
+                <p id="name2">Player2</p>
+            </div>
+            <div class="gameboard">
+                <button class="btn0 gameBtn notClicked" data-value="0" ></button>
+                <button class="btn1 gameBtn notClicked" data-value="1" ></button>
+                <button class="btn2 gameBtn notClicked" data-value="2" ></button>
+                <button class="btn3 gameBtn notClicked" data-value="3" ></button>
+                <button class="btn4 gameBtn notClicked" data-value="4" ></button>
+                <button class="btn5 gameBtn notClicked" data-value="5" ></button>
+                <button class="btn6 gameBtn notClicked" data-value="6" ></button>
+                <button class="btn7 gameBtn notClicked" data-value="7" ></button>
+                <button class="btn8 gameBtn notClicked" data-value="8" ></button>
+            </div>
+            
+        </div>
+        <div class="winner">
+          <span id='winningMessage'>MESSAGE GOES HERE</span>
+        </div>
     </div>
 
     <script src="./script.js"></script>
