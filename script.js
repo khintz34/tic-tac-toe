@@ -1,233 +1,211 @@
-// function createGameSettings() {
-//   let whosTurn = 1;
-//   let countOfPlays = 0;
-//   let gameArray = [];
-//   let sym1 = "X";
-//   let sym2 = "O";
-//   let gameOver = false;
-//   let mode = "human";
-//   let winner = false;
+const domElements = {
+  reset: document.querySelector("#reset"),
+  gameboard: document.querySelector(".gameboard"),
+  p1ChooseName: document.getElementById("choose-name-1"),
+  name1: document.getElementById("name1"),
+  p2ChooseName: document.getElementById("choose-name-2"),
+  name2: document.getElementById("name2"),
+  chooseSym1: document.getElementById("choose-sym-1"),
+  chooseSym2: document.getElementById("choose-sym-2"),
+  message: document.querySelector(".messages"),
+  p2Human: document.getElementById("p2-typeH"),
+  p2CPU: document.getElementById("p2-typeC"),
+  cpuQ: document.getElementsByName("cpuDiff"),
+  cpu: document.getElementById("cpu"),
+  q2p2: document.getElementById("q2p2"),
+  gameBtns: document.querySelectorAll(".gameBtn"),
+  showWinner: document.querySelector(".winner"),
+  menu: document.getElementById("menu"),
+  showWinner: document.querySelector(".winner"),
+};
 
-//   // Primitives
-//   // booleans, strings, numbers, maybe more
+const createGameSettings = (
+  whosTurn,
+  countOfPlays,
+  gameArray,
+  sym1,
+  sym2,
+  gameOver,
+  mode,
+  winner
+) => {
+  class Settings {
+    constructor(
+      whosTurn,
+      countOfPlays,
+      gameArray,
+      sym1,
+      sym2,
+      gameOver,
+      mode,
+      winner
+    ) {
+      this.whosTurn = whosTurn;
+      this.countOfPlays = countOfPlays;
+      this.gameArray = gameArray;
+      this.sym1 = sym1;
+      this.sym2 = sym2;
+      this.gameOver = gameOver;
+      this.mode = mode;
+      this.winner = winner;
+    }
+  }
 
-//   // References
-//   // objects, arrays, maps, etc maybe more
+  const createNewSetting = (
+    whosTurn,
+    countOfPlays,
+    gameArray,
+    sym1,
+    sym2,
+    gameOver,
+    mode,
+    winner
+  ) => {
+    editSettings = new Settings(
+      whosTurn,
+      countOfPlays,
+      gameArray,
+      sym1,
+      sym2,
+      gameOver,
+      mode,
+      winner
+    );
+    return editSettings;
+  };
 
-//   function updateWinner(someBoolean) {
-//     winner = someBoolean;
-//   }
+  function resetPlays() {
+    countOfPlays = 0;
+  }
 
-//   function isWon() {
-//     return winner == true;
-//   }
+  const updateTurn = (turn) => {
+    Setting1.whosTurn = turn;
+    console.log(`turn: ${Setting1.whosTurn}`);
+    console.log(`updated whosTurn to: ${Setting1.whosTurn}`);
+    return;
 
-//   return { updateWinner, isWon };
-// }
+    //   function updateTurn(turn) {
+    //     Setting1.whosTurn = turn;
+    //     console.log(`turn: ${Setting1.whosTurn}`);
+    //     console.log(`updated whosTurn to: ${Setting1.whosTurn}`);
+    //     return;
+  };
 
-// function createGame() {
-//   const gameSettings = createGameSettings();
+  function updateGameArray(e, index) {}
 
-//   const domElements = {
-//     resetButton: document.querySelector("#reset"),
-//     gameButtons: document.querySelectorAll(".gameBtn"),
-//   };
+  function ResetGameArray(array) {
+    gameArray = [];
+  }
 
-//   attachEventListeners();
+  function updateWinner(value) {
+    winner = value;
+  }
 
-//   function onGameClick() {}
+  function updateGameOver(value) {
+    gameOver = value;
+  }
 
-//   function attachEventListeners() {}
+  function updateMode(value) {
+    mode = value;
+    console.log(mode);
+    return mode;
+  }
 
-//   function makeMove() {
-//     domElements.resetButton;
-//     gameSettings.updateWinner(true);
+  function updateSyms(sym, value) {
+    if (sym === 1) {
+      sym1 = value;
+    } else {
+      sym2 = value;
+    }
+  }
 
-//     if (gameSettings.winner) {
-//     }
-//   }
+  function makeUpperCase(e, num) {
+    if (num === 1) {
+      Setting1.sym1 = Setting1.sym1.toLocaleUpperCase();
+      e.target.innerHTML = Setting1.sym1;
+    } else {
+      Setting1.sym2 = Setting1.sym2.toLocaleUpperCase();
+      e.target.innerHTML = Setting1.sym2;
+    }
+  }
 
-//   function checkForWinner() {}
-// }
+  function updateGameArray(index, sym) {
+    Setting1.gameArray[index] = sym;
+  }
 
-// createGame();
+  return {
+    updateTurn,
+    addPlayCount,
+    updateGameArray,
+    updateWinner,
+    updateGameOver,
+    ResetGameArray,
+    resetPlays,
+    updateMode,
+    updateSyms,
+    makeUpperCase,
+    updateGameArray,
+    createNewSetting,
+  };
+};
 
-let whosTurn = 1;
-let countOfPlays = 0;
-let gameArray = [];
-let sym1 = "X";
-let sym2 = "O";
-let gameOver = false;
-let mode = "human";
-let winner = false;
+const gameSettings = createGameSettings().createNewSetting(
+  1,
+  0,
+  [],
+  "X",
+  "O",
+  false,
+  "human",
+  false
+);
 
-window.onload = turnOnEventListeners;
+window.onload = turnOnEventListeners();
 
-function initilizeVisibility() {
-  const reset = document.getElementById("reset");
-  reset.style.visibility = "visible";
+function turnOnEventListeners() {
+  domElements.gameboard.onclick = onGameBoardClick;
 
-  const menu = document.getElementById("menu");
-  menu.style.visibility = "hidden";
+  domElements.p1ChooseName.onchange = changeNames;
+
+  domElements.p2ChooseName.onchange = changeNames;
+
+  domElements.chooseSym1.onchange = changeSymbols;
+
+  domElements.chooseSym2.onchange = changeSymbols;
+
+  domElements.p2Human.onchange = changeModeAttributes;
+
+  domElements.p2CPU.onchange = changeModeAttributes;
+
+  domElements.reset.onclick = resetGame;
 }
 
 function onGameBoardClick(e) {
-  initilizeVisibility();
+  changeVisibility(); //working
+
+  addPlayCount();
 
   if (e.target.innerHTML !== "") {
     return;
   }
 
-  if (gameOver === true) {
+  if (gameSettings.gameOver) {
     return;
   }
 
-  const index = e.target.getAttribute("data-value");
-  countOfPlays++;
-
-  if (whosTurn === 1) {
-    e.target.innerHTML = sym1.toLocaleUpperCase();
-    gameArray[index] = sym1.toLocaleUpperCase();
-  } else {
-    e.target.innerHTML = sym2.toLocaleUpperCase();
-    gameArray[index] = sym2.toLocaleUpperCase();
-  }
-
-  e.target.classList.remove("notClicked");
+  placeSymbol(e);
 
   checkForWinner();
 
-  console.log(winner);
+  changeTurn();
 
-  if (whosTurn === 1 && winner === false) {
-    whosTurn = 2;
-  } else if (whosTurn === 2 && winner === false) {
-    whosTurn = 1;
-  }
+  checkMode();
 
-  if (mode === "cpu" && winner === false) {
-    cpuMode();
-    checkForWinner();
-    whosTurn = 1;
-  }
-
-  return [menu, reset];
+  return;
 }
 
-function attachListener(id, onClickFunction) {
-  const element = document.getElementById("id");
-  element.onclick = onClickFunction;
-}
-
-function turnOnEventListeners() {
-  const gameboard = document.querySelector(".gameboard");
-  gameboard.onclick = onGameBoardClick;
-
-  const p1ChooseName = document.getElementById("choose-name-1");
-  p1ChooseName.onchange = function () {
-    const name1 = document.getElementById("name1");
-    name1.innerText = p1ChooseName.value;
-
-    if (name1.innerText === "" || name1.innerText === " ") {
-      name1.innerText = "Player1";
-    }
-  };
-
-  const p2ChooseName = document.getElementById("choose-name-2");
-  p2ChooseName.onchange = function () {
-    const name2 = document.getElementById("name2");
-    name2.innerText = p2ChooseName.value;
-
-    if (name2.innerText === "" || name2.innerText === " ") {
-      name2.innerText = "Player2";
-    }
-  };
-
-  const chooseSym1 = document.getElementById("choose-sym-1");
-  chooseSym1.onchange = function () {
-    sym1 = chooseSym1.value;
-  };
-
-  const chooseSym2 = document.getElementById("choose-sym-2");
-  chooseSym2.onchange = function () {
-    sym2 = chooseSym2.value;
-
-    if (sym1 === sym2) {
-      sym2 = "O";
-      const message = document.querySelector(".messages");
-      message.innerText = `Cannot choose same Symbol as Player1`;
-      message.style.display = "flex";
-    }
-  };
-
-  let p2TypeH = document.getElementById("p2-typeH");
-  let p2TypeC = document.getElementById("p2-typeC");
-  let cpuQ = document.getElementsByName("cpuDiff");
-  let cpu = document.getElementById("cpu");
-  let p2checked = 2;
-
-  for (let i = 0; i <= 2; i++) {
-    cpuQ[i].onchange = function () {
-      if (cpuQ[i].value === "easy") {
-        console.log("easy");
-      } else if (cpuQ[i].value === "medium") {
-        console.log("medium");
-      } else {
-        console.log("hard");
-      }
-    };
-  }
-
-  p2TypeH.onchange = function () {
-    p2TypeC.removeAttribute("checked");
-    p2TypeH.setAttribute("checked", "");
-    p2checked = 1;
-    name2.innerText = "Player2";
-    setPlayer2();
-  };
-
-  p2TypeC.onchange = function () {
-    p2TypeH.removeAttribute("checked");
-    p2TypeC.setAttribute("checked", "");
-    p2checked = 2;
-    setPlayer2();
-  };
-
-  function setPlayer2() {
-    const q2p2 = document.getElementById("q2p2");
-    if (p2checked === 1) {
-      q2p2.style.display = "flex";
-      cpu.style.display = "none";
-      mode = "human";
-    } else {
-      q2p2.style.display = "none";
-      cpu.style.display = "block";
-      mode = "cpu";
-      name2.innerText = "CPU";
-    }
-  }
-
-  reset.onclick = function () {
-    gameArray = [];
-    const gameBtns = document.querySelectorAll(".gameBtn");
-    whosTurn = 1;
-    reset.style.visibility = "hidden";
-    menu.style.visibility = "visible";
-    const showWinner = document.querySelector(".winner");
-    showWinner.style.display = "none";
-    gameOver = false;
-    reset.innerText = "RESET GAME";
-    const message = document.querySelector(".messages");
-    message.style.display = "none";
-    countOfPlays = 0;
-    winner = false;
-
-    for (let i = 0; i <= 8; i++) {
-      gameBtns[i].innerText = "";
-      gameBtns[i].classList.remove("btnWin");
-      gameBtns[i].classList.add("notClicked");
-    }
-  };
+function addPlayCount() {
+  gameSettings.countOfPlays++;
 }
 
 function checkForWinner() {
@@ -242,69 +220,54 @@ function checkForWinner() {
     [2, 5, 8],
   ];
 
-  const winningIndex = combinations.findIndex((c) => isWin(c[0], c[1], c[2]));
+  const winningIndex = combinations.findIndex((c) =>
+    checkCombos(c[0], c[1], c[2])
+  );
 
   if (winningIndex === -1) {
     return;
   } else {
-    winner = true;
+    triggerSettingsChanges();
+
     let winningCombo = combinations[winningIndex];
-    // let win1 = winningCombo[0];
-    // let win2 = winningCombo[1];
-    // let win3 = winningCombo[2];
-
-    // Destructing
     const [win1, win2, win3] = winningCombo;
-
-    // const test = {
-    //   x: 5,
-    //   y: 6
-    // }
-
-    // const { x, y } = test;
-    // console.log(x, y)
-
-    gameOver = true;
-    const showWinner = document.querySelector(".winner");
-    reset.innerText = "NEW GAME";
     const btnWin1 = document.querySelector(`.btn${win1}`);
     const btnWin2 = document.querySelector(`.btn${win2}`);
     const btnWin3 = document.querySelector(`.btn${win3}`);
     btnWin1.classList.add("btnWin");
     btnWin2.classList.add("btnWin");
     btnWin3.classList.add("btnWin");
-    console.log(whosTurn);
-    if (whosTurn === 1) {
-      showWinner.innerHTML = `${name1.innerText} Wins!`;
-    } else {
-      showWinner.innerHTML = `${name2.innerText} Wins!`;
-    }
-    showWinner.style.display = "flex";
-    return { btnWin1, btnWin2, btnWin3 };
+
+    displayWinner();
+
+    return {
+      btnWin1,
+      btnWin2,
+      btnWin3,
+    };
   }
 }
 
-function isWin(index1, index2, index3) {
+function checkCombos(index1, index2, index3) {
   if (
-    gameArray[index1] === "" ||
-    gameArray[index2] === "" ||
-    gameArray[index3] === ""
+    gameSettings.gameArray[index1] === "" ||
+    gameSettings.gameArray[index2] === "" ||
+    gameSettings.gameArray[index3] === ""
   ) {
     return false;
   } else if (
-    gameArray[index1] === undefined ||
-    gameArray[index2] === undefined ||
-    gameArray[index3] === undefined
+    gameSettings.gameArray[index1] === undefined ||
+    gameSettings.gameArray[index2] === undefined ||
+    gameSettings.gameArray[index3] === undefined
   ) {
     return false;
-  } else if (countOfPlays === 9) {
-    const showWinner = document.querySelector(".winner");
-    showWinner.innerText = "Tie Game! Want a rematch??";
-    showWinner.style.display = "flex";
+  } else if (gameSettings.countOfPlays === 9) {
+    domElements.showWinner.innerText = "Tie Game! Want a rematch??";
+    domElements.showWinner.style.display = "flex";
   } else {
     return (
-      gameArray[index1] === gameArray[index2] &&
-      gameArray[index1] === gameArray[index3]
+      gameSettings.gameArray[index1] === gameSettings.gameArray[index2] &&
+      gameSettings.gameArray[index1] === gameSettings.gameArray[index3]
     );
   }
 }
@@ -314,8 +277,8 @@ function cpuMode() {
   while (counter < 100) {
     counter++;
     let randomNum = Math.floor(Math.random() * 9);
-    if (gameArray[randomNum] === undefined) {
-      gameArray[randomNum] = "O";
+    if (gameSettings.gameArray[randomNum] === undefined) {
+      gameSettings.gameArray[randomNum] = "O";
       const p2Value = document.querySelector(
         `.gameBtn[data-value='${randomNum}']`
       );
@@ -324,4 +287,146 @@ function cpuMode() {
       return;
     }
   }
+}
+
+function changeVisibility() {
+  domElements.reset.style.visibility = "visible";
+  domElements.menu.style.visibility = "hidden";
+}
+
+function placeSymbol(e) {
+  const index = e.target.getAttribute("data-value");
+
+  if (gameSettings.whosTurn === 1) {
+    e.target.innerHTML = gameSettings.sym1.toLocaleUpperCase();
+    gameSettings.gameArray[index] = gameSettings.sym1;
+  } else {
+    e.target.innerHTML = gameSettings.sym2.toLocaleUpperCase();
+    gameSettings.gameArray[index] = gameSettings.sym2;
+  }
+
+  e.target.classList.remove("notClicked");
+}
+
+function changeTurn() {
+  if (gameSettings.whosTurn === 1 && gameSettings.winner === false) {
+    gameSettings.whosTurn = 2;
+  } else if (gameSettings.whosTurn === 2 && gameSettings.winner === false) {
+    gameSettings.whosTurn = 1;
+  }
+}
+
+function checkMode() {
+  if (gameSettings.mode === "cpu" && gameSettings.winner === false) {
+    cpuMode();
+    checkForWinner();
+    gameSettings.whosTurn = 1;
+  }
+}
+
+function changeNames() {
+  domElements.name1.innerText = domElements.p1ChooseName.value;
+  domElements.name2.innerText = domElements.p2ChooseName.value;
+
+  if (
+    domElements.name1.innerText === "" ||
+    domElements.name1.innerText === " "
+  ) {
+    domElements.name1.innerText = "Player1";
+  }
+
+  if (
+    domElements.name2.innerText === "" ||
+    domElements.name2.innerText === " "
+  ) {
+    domElements.name2.innerText = "Player2";
+  }
+}
+
+function changeSymbols() {
+  gameSettings.sym1 = domElements.chooseSym1.value;
+  gameSettings.sym2 = domElements.chooseSym2.value;
+
+  if (
+    domElements.chooseSym1.value === "" ||
+    domElements.chooseSym1.value === " "
+  ) {
+    gameSettings.sym1 = "X";
+    domElements.chooseSym2.innerText = "X";
+  }
+
+  if (
+    domElements.chooseSym2.value === "" ||
+    domElements.chooseSym2.value === " "
+  ) {
+    gameSettings.sym2 = "O";
+    domElements.chooseSym2.innerText = "O";
+  }
+
+  if (gameSettings.sym1 === gameSettings.sym2) {
+    gameSettings.sym2 = "O";
+    domElements.message.innerText = `Cannot choose same Symbol as Player1`;
+    domElements.message.style.display = "flex";
+  }
+}
+
+function changeModeAttributes() {
+  if (gameSettings.mode === "cpu") {
+    gameSettings.mode = "human";
+    domElements.p2Human.removeAttribute("checked");
+    domElements.p2CPU.setAttribute("checked", "");
+    domElements.name2.innerText = "Player2";
+    domElements.q2p2.style.display = "flex";
+  } else {
+    gameSettings.mode = "cpu";
+    domElements.p2Human.removeAttribute("checked");
+    domElements.p2CPU.setAttribute("checked", "");
+    domElements.name2.innerText = "CPU";
+    domElements.q2p2.style.display = "none";
+  }
+}
+
+function resetGame() {
+  resetGameSettings();
+  resetDomSettings();
+  resetGameButtons();
+}
+
+function resetGameSettings() {
+  gameSettings.gameArray = [];
+  gameSettings.whosTurn = 1;
+  gameSettings.countOfPlays = 0;
+  gameSettings.winner = false;
+  gameSettings.gameOver = false;
+}
+
+function resetDomSettings() {
+  domElements.reset.style.visibility = "hidden";
+  domElements.menu.style.visibility = "visible";
+  domElements.showWinner.style.display = "none";
+  domElements.reset.innerText = "RESET GAME";
+  domElements.message.style.display = "none";
+}
+
+function resetGameButtons() {
+  for (let i = 0; i <= 8; i++) {
+    domElements.gameBtns[i].innerText = "";
+    domElements.gameBtns[i].classList.remove("btnWin");
+    domElements.gameBtns[i].classList.add("notClicked");
+  }
+}
+
+function triggerSettingsChanges() {
+  gameSettings.winner = true;
+  gameSettings.gameOver = true;
+  domElements.reset.innerText = "NEW GAME";
+}
+
+function displayWinner() {
+  if (gameSettings.whosTurn === 1) {
+    domElements.showWinner.innerHTML = `${name1.innerText} Wins!`;
+  } else {
+    domElements.showWinner.innerHTML = `${name2.innerText} Wins!`;
+  }
+  domElements.showWinner.style.display = "flex";
 }
