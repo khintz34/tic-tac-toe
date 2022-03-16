@@ -266,16 +266,16 @@ function playGame() {
     settings.mode = "cpu";
     domElements.p2Human.removeAttribute("checked");
     domElements.p2CPU.setAttribute("checked", "");
-    domElements.name2.innerText = "Player2";
-    domElements.q2p2.style.display = "flex";
+    domElements.name2.innerText = "CPU";
+    domElements.q2p2.style.display = "none";
   }
 
   function changeModeAttributes_human() {
     settings.mode = "human";
     domElements.p2CPU.removeAttribute("checked");
     domElements.p2Human.setAttribute("checked", "");
-    domElements.name2.innerText = "CPU";
-    domElements.q2p2.style.display = "none";
+    domElements.name2.innerText = "Player2";
+    domElements.q2p2.style.display = "flex";
   }
 
   // reset button functions
